@@ -13,6 +13,14 @@ return {
   },
   {
     "MagicDuck/grug-far.nvim",
+    keys = {
+      {
+        "<Leader>ks",
+        "<Cmd>GrugFar<CR>",
+        mode = { "n", "i", "x" },
+        desc = "Repalce project word",
+      },
+    },
     config = function()
       require("grug-far").setup {
         -- options, see Configuration section below
@@ -45,13 +53,13 @@ return {
         desc = "Add or remove cursor",
       },
       {
-        "<Leader>ma",
+        "<Leader>ka",
         "<Cmd>MultipleCursorsAddMatches<CR>",
         mode = { "n", "x" },
         desc = "Add cursors to cword",
       },
       {
-        "<Leader>mA",
+        "<Leader>kA",
         "<Cmd>MultipleCursorsAddMatchesV<CR>",
         mode = { "n", "x" },
         desc = "Add cursors to cword in previous area",
