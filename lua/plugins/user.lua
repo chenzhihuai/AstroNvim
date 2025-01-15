@@ -4,6 +4,23 @@
 ---@type LazySpec
 return {
   {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      defaults = {
+        preview = false,
+        layout_config = {
+          preview_width = 0.618,
+          horizontal = {
+            height = 0.6,
+            preview_cutoff = 120,
+            prompt_position = "top",
+            width = 0.6,
+          },
+        },
+      },
+    },
+  },
+  {
     "AstroNvim/astrotheme",
     enabled = false,
     opts = {

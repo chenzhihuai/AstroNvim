@@ -109,6 +109,7 @@ return {
     { "NvChad/volt", lazy = true },
     {
       "chenzhihuai/base46",
+      branch = "custom",
       lazy = true,
       init = function() vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/" end,
       build = function()

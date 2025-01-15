@@ -1,6 +1,6 @@
 local M = {}
 M.base46 = {
-  theme = "aquarium",
+  theme = "gruvbox",
   integrations = { "dap", "cmp", "notify", "telescope", "todo" },
 }
 M.ui = {
