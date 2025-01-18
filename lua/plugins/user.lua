@@ -4,12 +4,23 @@
 ---@type LazySpec
 return {
   {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      event_handlers = {
+        {
+          event = "neo_tree_buffer_enter",
+          handler = function(_) vim.cmd [[setlocal fillchars=vert:▐,horiz:▄,vertright:▐,horizup:▟]] end,
+        },
+      },
+    },
+  },
+  {
     "nvim-telescope/telescope.nvim",
     opts = {
       defaults = {
         preview = false,
         layout_config = {
-          preview_width = 0.618,
+          -- preview_width = 0.618,
           horizontal = {
             height = 0.6,
             preview_cutoff = 120,
