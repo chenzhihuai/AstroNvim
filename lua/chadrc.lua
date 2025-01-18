@@ -1,7 +1,7 @@
 local M = {}
 M.base46 = {
-  theme = "gruvbox",
-  integrations = { "dap", "cmp", "notify", "telescope", "todo" },
+  theme = "aquarium",
+  integrations = { "dap", "cmp", "notify", "telescope", "todo", "neogit" },
 }
 M.ui = {
   statusline = {
@@ -49,9 +49,15 @@ M.nvdash = {
     { txt = "  Recent Files", hl = "NvDashHeader", keys = "Spc f o", cmd = "Telescope oldfiles" },
     { txt = "  New File", hl = "NvDashHeader", keys = "Spc f n", cmd = "ene" },
     {
+      txt = "  Sessions",
+      hl = "NvDashHeader",
+      keys = "Spc S f",
+      cmd = "lua require('resession').load()",
+    },
+    {
       txt = "  Configurations",
       hl = "NvDashHeader",
-      keys = "Spc f c",
+      keys = "Spc f a",
       cmd = "Telescope find_files cwd=" .. vim.fn.stdpath "config",
     },
 

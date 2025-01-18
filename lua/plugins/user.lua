@@ -4,6 +4,27 @@
 ---@type LazySpec
 return {
   {
+    "folke/edgy.nvim",
+    event = "VeryLazy",
+    opts = {
+      left = { "neo-tree" },
+      bottom = {
+        {
+          ft = "qf",
+          title = "quickfix",
+        },
+        {
+          ft = "toggleterm",
+          filter = function(buf, win) return vim.api.nvim_win_get_config(win).relative == "" end,
+        },
+      },
+      wo = {
+        winbar = true,
+        winhighlight = "",
+      },
+    },
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
       event_handlers = {
@@ -47,7 +68,18 @@ return {
       },
     },
   },
-
+  {
+    "NeogitOrg/neogit",
+    cmd = "Neogit",
+    dependencies = {
+      "sindrets/diffview.nvim", -- optional - Diff integration
+    },
+    config = function()
+      require("neogit").setup()
+      dofile(vim.g.base46_cache .. "git")
+      dofile(vim.g.base46_cache .. "neogit")
+    end,
+  },
   -- == Examples of Adding Plugins ==
 
   "andweeb/presence.nvim",

@@ -14,5 +14,3 @@ vim.filetype.add {
     ["~/%.config/foo/.*"] = "fooscript",
   },
 }
-vim.o.cmdheight = 1
-vim.o.relativenumber = false

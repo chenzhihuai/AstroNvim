@@ -25,11 +25,14 @@ return {
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
-        relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        cmdheight = 1,
+        relativenumber = false,
+        laststatus = 3,
+        -- fillchars = { vertleft = "│", verthoriz = "│", vertright = "│", horizup = "█", horiz = "█", horizdown = "█" },
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
