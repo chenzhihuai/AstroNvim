@@ -11,6 +11,7 @@ return {
   { import = "astrocommunity.git.gitgraph-nvim" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.search.grug-far-nvim" },
+  { import = "astrocommunity.fuzzy-finder.telescope-zoxide" },
   -- { import = "astrocommunity.pack.nvchad-ui" },
   -- import/override with your plugins folder
 }

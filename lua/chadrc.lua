@@ -16,6 +16,7 @@ M.ui = {
     lazyload = true,
     order = { "treeOffset", "buffers", "tabs", "btns" },
     modules = nil,
+    bufwidth = 20,
   },
   cmp = {
     lspkind_text = true,
