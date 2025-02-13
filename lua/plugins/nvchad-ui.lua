@@ -160,7 +160,7 @@ return {
           "nvim-neo-tree/neo-tree.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "neotree") end)
+            pcall(function() dofile(vim.g.base46_cache .. "neo-tree") end)
           end,
         },
         {
