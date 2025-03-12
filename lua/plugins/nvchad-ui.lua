@@ -104,7 +104,7 @@ return {
     },
     -- Disable unnecessary plugins
     -- { import = "astrocommunity.recipes.disable-tabline" },
-    { "rebelot/heirline.nvim", opts = { statusline = false } },
+    { "rebelot/heirline.nvim", enabled = false, opts = { statusline = false } },
     { "goolord/alpha-nvim", enabled = false },
     { "brenoprata10/nvim-highlight-colors", enabled = false },
     { "NvChad/nvim-colorizer.lua", enabled = false },

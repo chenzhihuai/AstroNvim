@@ -4,6 +4,14 @@
 ---@type LazySpec
 return {
   {
+    "windwp/nvim-ts-autotag",
+    opts = {},
+  },
+  {
+    "nmac427/guess-indent.nvim",
+    opts = {},
+  },
+  {
     "folke/edgy.nvim",
     event = "VeryLazy",
     opts = {
@@ -94,6 +102,7 @@ return {
   -- customize alpha options
   {
     "goolord/alpha-nvim",
+    enabled = false,
     opts = function(_, opts)
       -- customize the dashboard header
       opts.section.header.val = {
@@ -114,7 +123,7 @@ return {
   },
 
   -- You can disable default plugins as follows:
-  { "max397574/better-escape.nvim", enabled = false },
+  { "max397574/better-escape.nvim", enabled = true },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
@@ -126,7 +135,17 @@ return {
       luasnip.filetype_extend("javascript", { "javascriptreact" })
     end,
   },
-
+  -- {
+  --   "ZhiyuanLck/smart-pairs",
+  --   config = function() require("pairs"):setup() end,
+  --   specs = {
+  --     {
+  --       "windwp/nvim-autopairs",
+  --       optional = true,
+  --       enabled = false,
+  --     },
+  --   },
+  -- },
   {
     "windwp/nvim-autopairs",
     config = function(plugin, opts)

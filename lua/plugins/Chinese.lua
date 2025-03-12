@@ -56,8 +56,8 @@ return {
     event = "VeryLazy",
     opts = {
       highlight = {
-        backdrop = false,
-        matches = false,
+        -- backdrop = false,
+        -- matches = false,
       },
     },
   },

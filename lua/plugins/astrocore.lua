@@ -32,6 +32,7 @@ return {
         cmdheight = 1,
         relativenumber = false,
         laststatus = 3,
+        foldcolumn = "0",
         -- fillchars = { vertleft = "│", verthoriz = "│", vertright = "│", horizup = "█", horiz = "█", horizdown = "█" },
       },
       g = { -- vim.g.<key>
@@ -68,6 +69,20 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+        ["<C-Q>"] = false,
+      },
+      c = {
+        ["<F14>"] = "<esc>",
+      },
+      i = {
+        ["<F14>"] = "<esc>",
+        ["<C-BS>"] = "<C-W>",
+      },
+      o = {
+        ["<F14>"] = "<esc>",
+      },
+      v = {
+        ["<F14>"] = "<esc>",
       },
     },
   },
