@@ -9,7 +9,7 @@ return {
       "hrsh7th/nvim-cmp",
     },
     config = function()
-      local cmp_im = require "cmp_im"
+    local cmp_im = require "cmp_im"
       cmp_im.setup {
         -- Enable/Disable IM
         enable = false,
@@ -63,7 +63,7 @@ return {
   },
   {
     "liubianshi/cmp-lsp-rimels",
-    keys = { { "<localleader>f", mode = "i" } },
+    keys = { { "<a-f>", mode = "i" } },
     config = function()
       -- INSTALL
       -- apt install librime-dev
