@@ -34,6 +34,7 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
+    -- enabled=false,
     opts = {
       event_handlers = {
         {
@@ -175,4 +176,11 @@ return {
       )
     end,
   },
+
+  {
+    "rcarriga/nvim-notify",
+    opts={
+      stages="static",
+    }
+  }
 }

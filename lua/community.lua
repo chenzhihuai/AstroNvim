@@ -6,6 +6,8 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.cpp" },
+  { import = "astrocommunity.completion.blink-cmp" },
   { import = "astrocommunity.recipes.disable-tabline" },
   { import = "astrocommunity.git.neogit" },
   { import = "astrocommunity.git.gitgraph-nvim" },
