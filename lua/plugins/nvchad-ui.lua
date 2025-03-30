@@ -3,56 +3,7 @@ return {
   "chenzhihuai/nvchad-ui",
   lazy = false,
   branch = "custom",
-  opts = {
-    -- base46 = { theme = "onedark" },
-    nvdash = {
-      header = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
-        "",
-        "",
-        "",
-      },
-
-      buttons = {
-        { txt = "  Find File", keys = "Spc f f", cmd = "lua Snacks.picker.files()" },
-        { txt = "  Recent Files", keys = "Spc f o", cmd = "lua Snacks.picker.recent()" },
-        { txt = "󰈭  Find Word", keys = "Spc f w", cmd = "lua Snacks.picker.grep()" },
-        { txt = "󱥚  Themes", keys = "Spc f t", cmd = ":lua require('nvchad.themes').open()" },
-        { txt = "  Last Session", keys = "Spc S l", cmd = "lua Snacks.picker.session()" },
-
-        { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
-
-        {
-          txt = function()
-            local stats = require("lazy").stats()
-            local ms = math.floor(stats.startuptime) .. " ms"
-            return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
-          end,
-          hl = "NvDashLazy",
-          no_gap = true,
-        },
-
-        { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
-      },
-    },
-  },
-  -- init = function()
-  --   -- load the lazy opts on module load
-  --   package.preload["chadrc"] = function()
-  --     local plugin = require("lazy.core.config").spec.plugins["ui"]
-  --     return require("lazy.core.plugin").values(plugin, "opts", false)
-  --   end
-  -- end,
+  opts = {},
   config = function()
     pcall(function()
       dofile(vim.g.base46_cache .. "defaults")
@@ -149,25 +100,7 @@ return {
     {
       "folke/snacks.nvim",
       opts = {
-        dashboard = {
-          enabled = false,
-          preset = {
-            header = table.concat({
-              "                            ",
-              "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
-              "   ▄▀███▄     ▄██ █████▀    ",
-              "   ██▄▀███▄   ███           ",
-              "   ███  ▀███▄ ███           ",
-              "   ███    ▀██ ███           ",
-              "   ███      ▀ ███           ",
-              "   ▀██ █████▄▀█▀▄██████▄    ",
-              "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
-              "                            ",
-              "     Powered By  eovim    ",
-              "                            ",
-            }, "\n"),
-          },
-        },
+        dashboard = { enabled = false, },
         picker = {
           layout = {
             row = 1,
