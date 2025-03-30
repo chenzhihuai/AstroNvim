@@ -86,6 +86,17 @@ return {
       },
     },
     {
+      "Saghen/blink.cmp",
+      optional=true,
+      opts={
+        completion={
+          menu={
+            border='single'
+          }
+        } 
+      }
+    },
+    {
       "nvim-neo-tree/neo-tree.nvim",
       -- enabled=false,
       opts = {
