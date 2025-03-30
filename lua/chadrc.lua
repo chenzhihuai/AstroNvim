@@ -1,7 +1,7 @@
 local M = {}
 M.base46 = {
   theme = "aquarium",
-  integrations = { "dap", "cmp", "notify", "telescope", "todo", "neogit" },
+  integrations = { "dap", "cmp", "notify", "telescope", "todo", "neogit", "snacks-picker" },
 }
 M.ui = {
   statusline = {
@@ -46,21 +46,13 @@ M.nvdash = {
   },
 
   buttons = {
-    { txt = "  Find File", hl = "NvDashHeader", keys = "Spc f f", cmd = "Telescope find_files" },
-    { txt = "  Recent Files", hl = "NvDashHeader", keys = "Spc f o", cmd = "Telescope oldfiles" },
-    { txt = "  New File", hl = "NvDashHeader", keys = "Spc f n", cmd = "ene" },
-    {
-      txt = "  Sessions",
-      hl = "NvDashHeader",
-      keys = "Spc S f",
-      cmd = "lua require('resession').load()",
-    },
-    {
-      txt = "  Configurations",
-      hl = "NvDashHeader",
-      keys = "Spc f a",
-      cmd = "Telescope find_files cwd=" .. vim.fn.stdpath "config",
-    },
+    { txt = "  New File", hl = "NvDashHeader", keys = "n", cmd = "ene" },
+    { txt = "  Find File", hl = "NvDashHeader", keys = "f", cmd = "lua Snacks.picker.files()"},
+    { txt = "  Recent Files", hl = "NvDashHeader", keys = "o", cmd = "lua Snacks.picker.recent()" },
+    { txt = "󰈭  Find Word", hl = "NvDashHeader", keys = "w", cmd = "lua Snacks.picker.grep()" },
+    -- { txt = "󱥚  Themes", hl = "NvDashHeader", keys = "t", cmd = ":lua require('nvchad.themes').open()" },
+    { txt = "  Last Session", hl = "NvDashHeader", keys = "s", cmd = "lua require('resession').load('Last Session')" },
+    { txt = "  Configurations", hl = "NvDashHeader", keys = "a", cmd = "lua Snacks.picker.files({cwd=vim.fn.stdpath('config')})" },
 
     { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
 

@@ -24,11 +24,11 @@ return {
       },
 
       buttons = {
-        { txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
-        { txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
-        { txt = "󰈭  Find Word", keys = "Spc f w", cmd = "Telescope live_grep" },
+        { txt = "  Find File", keys = "Spc f f", cmd = "lua Snacks.picker.files()" },
+        { txt = "  Recent Files", keys = "Spc f o", cmd = "lua Snacks.picker.recent()" },
+        { txt = "󰈭  Find Word", keys = "Spc f w", cmd = "lua Snacks.picker.grep()" },
         { txt = "󱥚  Themes", keys = "Spc f t", cmd = ":lua require('nvchad.themes').open()" },
-        { txt = "  Last Session", keys = "Spc S l", cmd = "NvCheatsheet" },
+        { txt = "  Last Session", keys = "Spc S l", cmd = "lua Snacks.picker.session()" },
 
         { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
 
@@ -63,13 +63,19 @@ return {
     for i = 1, 9, 1 do
       vim.keymap.set("n", string.format("<A-%s>", i), function() vim.api.nvim_set_current_buf(vim.t.bufs[i]) end)
     end
+    vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
+      require('menu.utils').delete_old_menus()
+
+      vim.cmd.exec '"normal! \\<RightMouse>"'
+
+      -- clicked buf
+      local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+      local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
+
+      require("menu").open(options, { mouse = true })
+    end, {})
   end,
   specs = {
-    {
-      "hrsh7th/nvim-cmp",
-      optional = true,
-      opts = function(_, opts) return vim.tbl_deep_extend("force", opts, require "nvchad.cmp") end,
-    },
     {
       "AstroNvim/astrocore",
       opts = {
@@ -102,15 +108,88 @@ return {
         },
       },
     },
-    -- Disable unnecessary plugins
-    -- { import = "astrocommunity.recipes.disable-tabline" },
-    { "rebelot/heirline.nvim", enabled = false, opts = { statusline = false } },
-    { "goolord/alpha-nvim", enabled = false },
-    { "brenoprata10/nvim-highlight-colors", enabled = false },
-    { "NvChad/nvim-colorizer.lua", enabled = false },
-    -- add lazy loaded dependencies
+
     { "nvim-lua/plenary.nvim", lazy = true },
     { "NvChad/volt", lazy = true },
+    { "nvzone/menu" , lazy = true },
+
+    -- Override 
+    { "rebelot/heirline.nvim", enabled = false, opts = { statusline = false } },
+    { "brenoprata10/nvim-highlight-colors", enabled = false },
+    { "NvChad/nvim-colorizer.lua", enabled = false },
+    { import = "astrocommunity.recipes.disable-tabline" },
+    {
+      "AstroNvim/astrotheme",
+      enabled = false,
+      opts = {
+        style = {
+          transparent = false, -- Bool value, toggles transparency.
+          inactive = false, -- Bool value, toggles inactive window color.
+          float = true, -- Bool value, toggles floating windows background colors.
+          neotree = true, -- Bool value, toggles neo-trees background color.
+          border = true, -- Bool value, toggles borders.
+          title_invert = true, -- Bool value, swaps text and background colors.
+          italic_comments = true, -- Bool value, toggles italic comments.
+          simple_syntax_colors = true, -- Bool value, simplifies the amounts of colors used for syntax highlighting.
+        },
+      },
+    },
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      -- enabled=false,
+      opts = {
+        event_handlers = {
+          {
+            event = "neo_tree_buffer_enter",
+            handler = function(_) vim.cmd [[setlocal fillchars=vert:▐,horiz:▄,vertright:▐,horizup:▟]] end,
+          },
+        },
+      },
+    },
+    {
+      "folke/snacks.nvim",
+      opts = {
+        dashboard = {
+          enabled = false,
+          preset = {
+            header = table.concat({
+              "                            ",
+              "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+              "   ▄▀███▄     ▄██ █████▀    ",
+              "   ██▄▀███▄   ███           ",
+              "   ███  ▀███▄ ███           ",
+              "   ███    ▀██ ███           ",
+              "   ███      ▀ ███           ",
+              "   ▀██ █████▄▀█▀▄██████▄    ",
+              "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+              "                            ",
+              "     Powered By  eovim    ",
+              "                            ",
+            }, "\n"),
+          },
+        },
+        picker = {
+          layout = {
+            row = 1,
+            layout = {
+              backdrop = true,
+              box = "horizontal",
+              width = 0.6,
+              min_width = 120,
+              height = 0.6,
+              border="right",
+              {
+                box = "vertical",
+                border = "none",
+                { win = "input", title = "{title} {live} {flags}", height = 1, border = "rounded" },
+                { box = "vertical", border = "rounded", { win = "list", border = "hpad" } },
+              },
+              { win = "preview", title = "{preview}", border = "rounded" },
+            },
+          },
+        },
+      },
+    },
     {
       "chenzhihuai/base46",
       branch = "custom",
@@ -203,10 +282,18 @@ return {
           end,
         },
         {
-          "hrsh7th/nvim-cmp",
+          "folke/snacks.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "cmp") end)
+            pcall(function() dofile(vim.g.base46_cache .. "snacks-picker") end)
+          end,
+        },
+        {
+          "NeogitOrg/neogit",
+          optional=true,
+          config = function()
+            dofile(vim.g.base46_cache .. "git")
+            dofile(vim.g.base46_cache .. "neogit")
           end,
         },
       },

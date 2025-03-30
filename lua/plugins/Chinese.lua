@@ -1,5 +1,4 @@
--- 中文输入法有什么不好的地方吗
--- 这个只有一个人知道就好,f了
+if true then return {} end
 return {
   {
     "yehuohan/cmp-im",
