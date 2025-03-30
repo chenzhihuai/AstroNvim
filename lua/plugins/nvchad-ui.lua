@@ -6,22 +6,6 @@ return {
   opts = {
     -- base46 = { theme = "onedark" },
     nvdash = {
-      header = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
-        "",
-        "",
-        "",
-      },
 
       buttons = {
         { txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
@@ -46,13 +30,6 @@ return {
       },
     },
   },
-  -- init = function()
-  --   -- load the lazy opts on module load
-  --   package.preload["chadrc"] = function()
-  --     local plugin = require("lazy.core.config").spec.plugins["ui"]
-  --     return require("lazy.core.plugin").values(plugin, "opts", false)
-  --   end
-  -- end,
   config = function()
     pcall(function()
       dofile(vim.g.base46_cache .. "defaults")

@@ -21,7 +21,7 @@ M.ui = {
   cmp = {
     lspkind_text = true,
     icons_left = false,
-    style = "default", -- default/flat_light/flat_dark/atom/atom_colored
+    style = "flat_dark", -- default/flat_light/flat_dark/atom/atom_colored
   },
 }
 M.lsp = {
