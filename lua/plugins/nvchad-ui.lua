@@ -28,6 +28,11 @@ return {
   end,
   specs = {
     {
+      "hrsh7th/nvim-cmp",
+      optional = true,
+      opts = function(_, opts) return vim.tbl_deep_extend("force", opts, require "nvchad.cmp") end,
+    },
+    {
       "AstroNvim/astrocore",
       opts = {
         options = { opt = { showtabline = 0 } },
@@ -62,10 +67,11 @@ return {
 
     { "nvim-lua/plenary.nvim", lazy = true },
     { "NvChad/volt", lazy = true },
-    { "nvzone/menu" , lazy = true },
+    { "nvzone/menu" , lazy = false },
 
     -- Override 
     { "rebelot/heirline.nvim", enabled = false, opts = { statusline = false } },
+    { "goolord/alpha-nvim", enabled = false },
     { "brenoprata10/nvim-highlight-colors", enabled = false },
     { "NvChad/nvim-colorizer.lua", enabled = false },
     { import = "astrocommunity.recipes.disable-tabline" },
@@ -91,9 +97,25 @@ return {
       opts={
         completion={
           menu={
-            border='single'
+            border='single',
+            winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
+            scrollbar = false,
+          },
+          documentation={
+            auto_show=true,
+            window={
+              border='single',
+              winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
+            }
+          },
+        },
+        signature={
+          -- enabled=true,
+          window={
+            border='single',
+            winhighlight = 'Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder',
           }
-        } 
+        }
       }
     },
     {
@@ -233,11 +255,25 @@ return {
           end,
         },
         {
+          "Saghen/blink.cmp",
+          optional=true,
+          opts= function()
+            pcall(function() dofile(vim.g.base46_cache .. "blink") end)
+          end,
+        },
+        {
           "NeogitOrg/neogit",
           optional=true,
-          config = function()
+          opts = function()
             dofile(vim.g.base46_cache .. "git")
             dofile(vim.g.base46_cache .. "neogit")
+          end,
+        },
+        {
+          "sindrets/diffview.nvim",
+          optional=true,
+          opts = function()
+            dofile(vim.g.base46_cache .. "diffview")
           end,
         },
       },

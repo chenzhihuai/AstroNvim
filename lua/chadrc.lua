@@ -1,7 +1,7 @@
 local M = {}
 M.base46 = {
   theme = "aquarium",
-  integrations = { "dap", "cmp", "notify", "telescope", "todo", "neogit", "snacks-picker" },
+  integrations = { "diffview", "dap", "cmp", "notify", "telescope", "todo", "neogit", "snacks-picker", "blink-cmp" },
 }
 M.ui = {
   statusline = {
@@ -25,7 +25,7 @@ M.ui = {
   },
 }
 M.lsp = {
-  signature = true,
+  -- signature = true,
 }
 M.nvdash = {
   load_on_startup = true,
