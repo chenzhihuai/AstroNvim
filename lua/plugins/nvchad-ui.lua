@@ -14,17 +14,6 @@ return {
     for i = 1, 9, 1 do
       vim.keymap.set("n", string.format("<A-%s>", i), function() vim.api.nvim_set_current_buf(vim.t.bufs[i]) end)
     end
-    vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
-      require('menu.utils').delete_old_menus()
-
-      vim.cmd.exec '"normal! \\<RightMouse>"'
-
-      -- clicked buf
-      local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
-      local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
-
-      require("menu").open(options, { mouse = true })
-    end, {})
   end,
   specs = {
     {
@@ -36,7 +25,7 @@ return {
       "AstroNvim/astrocore",
       opts = {
         options = { opt = { showtabline = 0 } },
-        autocmds = { bufferline = false },
+        autocmds = { bufferline = false, },
         mappings = {
           n = {
             ["<Leader>h"] = {
@@ -75,6 +64,8 @@ return {
     { "brenoprata10/nvim-highlight-colors", enabled = false },
     { "NvChad/nvim-colorizer.lua", enabled = false },
     { import = "astrocommunity.recipes.disable-tabline" },
+    { import = "astrocommunity.recipes.picker-nvchad-theme" },
+
     {
       "AstroNvim/astrotheme",
       enabled = false,
@@ -118,10 +109,45 @@ return {
         }
       }
     },
+
+    {
+      "nvim-tree/nvim-tree.lua",
+      enabled=false,
+      init = function ()
+        vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+          pattern={"NvimTree_*"},
+          callback=function(_)
+            vim.cmd [[setlocal fillchars=vert:▐,horiz:▄,vertright:▐,horizup:▟]]
+          end
+        })
+        vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
+          require('menu.utils').delete_old_menus()
+
+          vim.cmd.exec '"normal! \\<RightMouse>"'
+
+          -- clicked buf
+          local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+          local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
+
+          require("menu").open(options, { mouse = true })
+        end, {})
+      end,
+      opts={ },
+      keys ={
+        {"<leader>e", "<cmd>NvimTreeOpen<cr>", desc="NvimTree"}
+      }
+    },
+
     {
       "nvim-neo-tree/neo-tree.nvim",
       -- enabled=false,
       opts = {
+
+        filesystem = {
+          hijack_netrw_behavior = "open_default",
+          -- "open_current",
+          -- "disabled",
+        },
         event_handlers = {
           {
             event = "neo_tree_buffer_enter",
