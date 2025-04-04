@@ -66,7 +66,31 @@ return {
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        ["<leader>fz"] =  { function()
+					Snacks.picker.zoxide(
+					{
+						finder = "files_zoxide",
+						format = "file",
+						-- confirm = "load_session" -- Disable loading session by default.
+						confirm = function(picker, item)
+							picker:close()
+							-- if item then
+							-- 	Snacks.picker.files({ cwd = item.text })
+							-- end
+							local dir = item.file
+							vim.fn.chdir(dir)
 
+              local api = require("nvim-tree.api")
+              api.tree.change_root(dir)
+						end,
+						win = {
+							preview = {
+								minimal = true,
+							},
+						},
+					}
+					)
+				end, desc="Zoxide" },
 
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus

@@ -112,7 +112,7 @@ return {
 
     {
       "nvim-tree/nvim-tree.lua",
-      enabled=false,
+      -- enabled=false,
       init = function ()
         vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
           pattern={"NvimTree_*"},
@@ -134,13 +134,13 @@ return {
       end,
       opts={ },
       keys ={
-        {"<leader>e", "<cmd>NvimTreeOpen<cr>", desc="NvimTree"}
+        {"<leader>e", "<cmd>NvimTreeToggle<cr>", desc="NvimTree"}
       }
     },
 
     {
       "nvim-neo-tree/neo-tree.nvim",
-      -- enabled=false,
+      enabled=false,
       opts = {
 
         filesystem = {
@@ -157,6 +157,31 @@ return {
       },
     },
     {
+      "folke/edgy.nvim",
+      event = "VeryLazy",
+      opts = {
+        animate = {
+          enabled = false,
+        },
+        left = { "NvimTree" },
+        bottom = {
+          {
+            ft = "qf",
+            title = "quickfix",
+          },
+          {
+            ft = "toggleterm",
+            filter = function(buf, win) return vim.api.nvim_win_get_config(win).relative == "" end,
+          },
+        },
+        options={bottom={size=16}},
+        wo = {
+          winbar = true,
+          winhighlight = "",
+        },
+      },
+    },
+    {
       "folke/snacks.nvim",
       opts = {
         dashboard = { enabled = false, },
@@ -166,9 +191,9 @@ return {
             layout = {
               backdrop = true,
               box = "horizontal",
-              width = 0.6,
+              width = 0.7,
               min_width = 120,
-              height = 0.6,
+              height = 0.7,
               border="right",
               {
                 box = "vertical",

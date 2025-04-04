@@ -4,6 +4,7 @@
 
 ---@type LazySpec
 return {
+  -- https://astronvim.github.io/astrocommunity
   "AstroNvim/astrocommunity",
 
   -- language package
@@ -24,6 +25,8 @@ return {
   { import = "astrocommunity.media.img-clip-nvim" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.markdown-and-latex.markview-nvim" },
-  -- { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
   { import = "astrocommunity.markdown-and-latex.peek-nvim" },
+  --
+  -- others
+  { import = "astrocommunity.recipes.neovide" },
 }
