@@ -62,15 +62,16 @@ return {
   },
   {
     "liubianshi/cmp-lsp-rimels",
-    keys = { { "<a-f>", mode = "i" } },
+    branch="blink.cmp",
     config = function()
       -- INSTALL
       -- apt install librime-dev
       -- apt install librime-data-double-pinyin
       -- build rime-ls or use release
-      vim.system({ "rime_ls", "--listen", "127.0.0.1:9257" }, { detach = true })
+      -- vim.system({ vim.fn.stdpath('config').."/external/rime_ls", "--listen", "127.0.0.1:9527" }, { detach = true })
       require("rimels").setup {
-        cmd = vim.lsp.rpc.connect("127.0.0.1", 9257),
+        -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9527),
+        cmd = vim.lsp.rpc.connect("192.168.3.48", 9527),
       }
     end,
   },
@@ -168,8 +169,4 @@ return {
       }
     end,
   },
-  -- {
-  --   "ppwwyyxx/vim-PinyinSearch",
-  --   config = function() vim.g.PinyinSearch_Dict = "~/.local/share/nvim/lazy/vim-PinyinSearch/PinyinSearch.dict" end,
-  -- },
 }

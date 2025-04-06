@@ -54,17 +54,24 @@ return {
       },
     },
 
+    -- Disable unnecessary plugins
+    { import = "astrocommunity.recipes.disable-tabline" },
+    { "rebelot/heirline.nvim", enabled=false, opts = { statusline = false } },
+    { "goolord/alpha-nvim", enabled = false },
+    {
+      "folke/snacks.nvim",
+      optional = true,
+      ---@type snacks.Config
+      opts = { dashboard = { enabled = false } },
+    },
+    { "brenoprata10/nvim-highlight-colors", enabled = false },
+    { "NvChad/nvim-colorizer.lua", enabled = false },
+
     { "nvim-lua/plenary.nvim", lazy = true },
     { "NvChad/volt", lazy = true },
     { "nvzone/menu" , lazy = false },
+    -- { import = "astrocommunity.recipes.picker-nvchad-theme" },
 
-    -- Override 
-    { "rebelot/heirline.nvim", enabled = false, opts = { statusline = false } },
-    { "goolord/alpha-nvim", enabled = false },
-    { "brenoprata10/nvim-highlight-colors", enabled = false },
-    { "NvChad/nvim-colorizer.lua", enabled = false },
-    { import = "astrocommunity.recipes.disable-tabline" },
-    { import = "astrocommunity.recipes.picker-nvchad-theme" },
 
     {
       "AstroNvim/astrotheme",
@@ -113,8 +120,8 @@ return {
     {
       "nvim-tree/nvim-tree.lua",
       -- enabled=false,
-      init = function ()
-        vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+      opts  = function ()
+        vim.api.nvim_create_autocmd({"BufEnter", "BufNewFile"}, {
           pattern={"NvimTree_*"},
           callback=function(_)
             vim.cmd [[setlocal fillchars=vert:▐,horiz:▄,vertright:▐,horizup:▟]]
@@ -132,7 +139,6 @@ return {
           require("menu").open(options, { mouse = true })
         end, {})
       end,
-      opts={ },
       keys ={
         {"<leader>e", "<cmd>NvimTreeToggle<cr>", desc="NvimTree"}
       }
@@ -184,6 +190,9 @@ return {
     {
       "folke/snacks.nvim",
       opts = {
+        styles={
+          notification={border='single'},
+        },
         dashboard = { enabled = false, },
         picker = {
           layout = {
@@ -191,7 +200,7 @@ return {
             layout = {
               backdrop = true,
               box = "horizontal",
-              width = 0.7,
+              width = 0.8,
               min_width = 120,
               height = 0.7,
               border="right",
@@ -306,10 +315,17 @@ return {
           end,
         },
         {
+          "hrsh7th/nvim-cmp",
+          optional = true,
+          opts = function()
+            pcall(function() dofile(vim.g.base46_cache .. "cmp") end)
+          end,
+        },
+        {
           "Saghen/blink.cmp",
           optional=true,
           opts= function()
-            pcall(function() dofile(vim.g.base46_cache .. "blink") end)
+            pcall(function() dofile(vim.g.base46_cache .. "blink-cmp") end)
           end,
         },
         {
