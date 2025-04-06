@@ -180,9 +180,12 @@ return {
             filter = function(buf, win) return vim.api.nvim_win_get_config(win).relative == "" end,
           },
         },
-        options={bottom={size=16}},
+        options={
+          left={wo={winbar=false}},
+          bottom={size=16},
+        },
         wo = {
-          winbar = true,
+          -- winbar = false,
           winhighlight = "",
         },
       },
