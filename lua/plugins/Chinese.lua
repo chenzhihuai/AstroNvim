@@ -52,6 +52,7 @@ return {
   },
   {
     "folke/flash.nvim",
+    optional=true,
     event = "VeryLazy",
     opts = {
       highlight = {
@@ -68,12 +69,50 @@ return {
       -- apt install librime-dev
       -- apt install librime-data-double-pinyin
       -- build rime-ls or use release
-      -- vim.system({ vim.fn.stdpath('config').."/external/rime_ls", "--listen", "127.0.0.1:9527" }, { detach = true })
+      vim.system({ vim.fn.stdpath('config').."/external/rime_ls", "--listen", "127.0.0.1:9527" }, { detach = true })
       require("rimels").setup {
         -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9527),
-        cmd = vim.lsp.rpc.connect("192.168.3.48", 9527),
+        long_filter_text=true,
+        cmd = vim.lsp.rpc.connect("127.0.0.1", 9527),
       }
     end,
+    specs = {
+      {
+        "AstroNvim/astrocore",
+        optional=true,
+        opts={
+          options = {
+            opt = { -- vim.opt.<key>
+              iskeyword = "_,49-57,A-Z,a-z"
+            }
+          }
+        }
+      },
+      {
+        "Saghen/blink.cmp",
+        optional=true,
+        opts={
+          sources = {
+            -- ...
+            providers = {
+              lsp = {
+                transform_items = function(_, items)
+                  -- the default transformer will do this
+                  for _, item in ipairs(items) do
+                    if item.kind == require('blink.cmp.types').CompletionItemKind.Snippet then
+                      item.score_offset = item.score_offset - 3
+                    end
+                  end
+                  -- you can define your own filter for rime item
+                  return items
+                end
+              }
+            },
+            -- ...
+          },
+        }
+      }
+    }
   },
   {
     "noearc/jieba.nvim",
