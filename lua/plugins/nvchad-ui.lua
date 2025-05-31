@@ -82,6 +82,7 @@ return {
           inactive = false, -- Bool value, toggles inactive window color.
           float = true, -- Bool value, toggles floating windows background colors.
           neotree = true, -- Bool value, toggles neo-trees background color.
+
           border = true, -- Bool value, toggles borders.
           title_invert = true, -- Bool value, swaps text and background colors.
           italic_comments = true, -- Bool value, toggles italic comments.
@@ -119,7 +120,7 @@ return {
 
     {
       "nvim-tree/nvim-tree.lua",
-      -- enabled=false,
+      enabled=false,
       opts  = function ()
         vim.api.nvim_create_autocmd({"BufEnter", "BufNewFile"}, {
           pattern={"NvimTree_*"},
@@ -146,7 +147,20 @@ return {
 
     {
       "nvim-neo-tree/neo-tree.nvim",
-      enabled=false,
+      -- enabled=false,
+      keys ={
+        {"<RightMouse>", function()
+          require('menu.utils').delete_old_menus()
+
+          vim.cmd.exec '"normal! \\<RightMouse>"'
+
+          -- clicked buf
+          local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+          local options = vim.bo[buf].ft == "neo-tree" and "neo-tree" or "default"
+
+          require("menu").open(options, { mouse = true })
+        end, desc="NeoTreeMenu"}
+      },
       opts = {
 
         filesystem = {

@@ -20,7 +20,7 @@ return {
   { import = "astrocommunity.search.grug-far-nvim" },
 
   -- markdown
-  { import = "astrocommunity.note-taking.obsidian-nvim" },
+  -- { import = "astrocommunity.note-taking.obsidian-nvim" },
   { import = "astrocommunity.media.img-clip-nvim" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.markdown-and-latex.markview-nvim" },
@@ -30,12 +30,16 @@ return {
   { import = "astrocommunity.code-runner.molten-nvim" },
 
   -- runner
-  { import = "astrocommunity.code-runner.compiler-nvim" },
+  -- { import = "astrocommunity.code-runner.compiler-nvim" },
   { import = "astrocommunity.code-runner.executor-nvim" },
-  
   -- others
   { import = "astrocommunity.recipes.neovide" },
-  { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },
+  { import = "astrocommunity.file-explorer.oil-nvim" },
+  { import = "astrocommunity.editing-support.bigfile-nvim" },
+  { import = "astrocommunity.workflow.hardtime-nvim" },
+  { import = "astrocommunity.terminal-integration.flatten-nvim" },
+  { import = "astrocommunity.editing-support.nvim-devdocs" },
+  -- { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },
   {
     "nvim-telescope/telescope.nvim",
     opts = {
@@ -43,7 +47,7 @@ return {
         preview = false,
         layout_config = {
           -- preview_width = 0.618,
-          horizontal = { height = 0.6, preview_cutoff = 120, prompt_position = "top", width = 0.6 },
+          -- horizontal = { height = 0.8, preview_cutoff = 120, prompt_position = "top", width = 0.8 },
         },
       },
     },

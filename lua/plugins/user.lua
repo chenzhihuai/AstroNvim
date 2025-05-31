@@ -12,6 +12,7 @@ return {
   "andweeb/presence.nvim",
   {
     "ray-x/lsp_signature.nvim",
+    enabled=false,
     event = "BufRead",
     config = function() require("lsp_signature").setup() end,
   },
@@ -25,18 +26,18 @@ return {
       dashboard = {
         preset = {
           header = table.concat({
-    "                            ",
-    "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
-    "   ▄▀███▄     ▄██ █████▀    ",
-    "   ██▄▀███▄   ███           ",
-    "   ███  ▀███▄ ███           ",
-    "   ███    ▀██ ███           ",
-    "   ███      ▀ ███           ",
-    "   ▀██ █████▄▀█▀▄██████▄    ",
-    "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
-    "                            ",
-    "     Powered By  eovim    ",
-    "                            ",
+            "                            ",
+            "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+            "   ▄▀███▄     ▄██ █████▀    ",
+            "   ██▄▀███▄   ███           ",
+            "   ███  ▀███▄ ███           ",
+            "   ███    ▀██ ███           ",
+            "   ███      ▀ ███           ",
+            "   ▀██ █████▄▀█▀▄██████▄    ",
+            "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+            "                            ",
+            "     Powered By  eovim    ",
+            "                            ",
           }, "\n"),
         },
       },
@@ -96,5 +97,42 @@ return {
     "nmac427/guess-indent.nvim",
     opts = {},
   },
+  {
+    "otavioschwanck/arrow.nvim",
+    dependencies = {
+      -- { "nvim-tree/nvim-web-devicons" },
+      -- or if using `mini.icons`
+      -- { "echasnovski/mini.icons" },
+    },
+    opts = {
+      show_icons = true,
+      leader_key = '<leader><leader>', -- Recommended to be a single key
+      buffer_leader_key = 'm', -- Per Buffer Mappings
+    }
+  },
+  {
+    'simonmclean/triptych.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- required
+      'nvim-tree/nvim-web-devicons', -- optional for icons
+      'antosha417/nvim-lsp-file-operations' -- optional LSP integration
+    },
+    opts = {}, -- config options here
+    keys = {
+      { '<leader>-', ':Triptych<CR>' },
+    },
+  },
+  {
+    'b0o/incline.nvim',
+    config = function()
+      require('incline').setup()
+    end,
+    -- Optional: Lazy load Incline
+    event = 'VeryLazy',
+  },
+  {
+    'dstein64/vim-startuptime'
+  }
   -- == Overrided Plugins ==
+
 }
