@@ -17,4 +17,4 @@ end
 
 require "lazy_setup"
 require "polish"
--- require("base46").load_all_highlights();
+require("base46").load_all_highlights();
