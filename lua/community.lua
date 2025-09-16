@@ -9,9 +9,9 @@ return {
 
   -- language package
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.pack.cpp" },
-  { import = "astrocommunity.pack.python-ruff" },
-  { import = "astrocommunity.pack.vue" },
+  -- { import = "astrocommunity.pack.cpp" },
+  -- { import = "astrocommunity.pack.python-ruff" },
+  -- { import = "astrocommunity.pack.vue" },
 
   -- tools
   { import = "astrocommunity.git.neogit" },
@@ -21,22 +21,18 @@ return {
 
   -- markdown
   -- { import = "astrocommunity.note-taking.obsidian-nvim" },
-  { import = "astrocommunity.media.img-clip-nvim" },
-  { import = "astrocommunity.pack.markdown" },
-  { import = "astrocommunity.markdown-and-latex.markview-nvim" },
-  { import = "astrocommunity.markdown-and-latex.peek-nvim" },
+  -- { import = "astrocommunity.media.img-clip-nvim" },
+  -- { import = "astrocommunity.pack.markdown" },
+  -- { import = "astrocommunity.markdown-and-latex.markview-nvim" },
+  -- { import = "astrocommunity.markdown-and-latex.peek-nvim" },
 
   --jupyter 
-  { import = "astrocommunity.code-runner.molten-nvim" },
+  -- { import = "astrocommunity.code-runner.molten-nvim" },
 
-  -- runner
-  -- { import = "astrocommunity.code-runner.compiler-nvim" },
-  { import = "astrocommunity.code-runner.executor-nvim" },
   -- others
   { import = "astrocommunity.recipes.neovide" },
   { import = "astrocommunity.file-explorer.oil-nvim" },
   { import = "astrocommunity.editing-support.bigfile-nvim" },
-  { import = "astrocommunity.workflow.hardtime-nvim" },
   { import = "astrocommunity.terminal-integration.flatten-nvim" },
   { import = "astrocommunity.editing-support.nvim-devdocs" },
   -- { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },

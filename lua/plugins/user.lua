@@ -252,10 +252,9 @@ return {
       "MunifTanjim/nui.nvim", -- To build the plugin UI
       "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
     },
-    config=true,
-    opt = {
+    opts = {
       offline_mode = {
-        enabled = true,
+        enabled = false,
         no_github = false,
       }
     }
@@ -279,8 +278,6 @@ return {
         return
       end
       cybu.setup()
-      vim.keymap.set("n", "K", "<Plug>(CybuPrev)")
-      vim.keymap.set("n", "J", "<Plug>(CybuNext)")
       vim.keymap.set({"n", "v"}, "<c-s-tab>", "<plug>(CybuLastusedPrev)")
       vim.keymap.set({"n", "v"}, "<c-tab>", "<plug>(CybuLastusedNext)")
     end,

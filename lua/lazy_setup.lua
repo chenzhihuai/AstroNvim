@@ -1,3 +1,4 @@
+local ghproxy = "https://ghproxy.com/"
 require("lazy").setup({
   {
     "AstroNvim/AstroNvim",
@@ -15,6 +16,7 @@ require("lazy").setup({
   { import = "plugins" },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
+  --git = { url_format = ghproxy .. "https://github.com/%s.git", },
   install = { colorscheme = { "astrotheme", "habamax" } },
   ui = { backdrop = 100 },
   performance = {
