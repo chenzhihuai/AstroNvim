@@ -12,9 +12,11 @@ return {
   "andweeb/presence.nvim",
   {
     "ray-x/lsp_signature.nvim",
-    enabled=false,
+    enabled = false,
     event = "BufRead",
-    config = function() require("lsp_signature").setup() end,
+    config = function()
+      require("lsp_signature").setup()
+    end,
   },
 
   -- == Examples of Overriding Plugins ==
@@ -51,9 +53,9 @@ return {
   {
     "L3MON4D3/LuaSnip",
     config = function(plugin, opts)
-      require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+      require("astronvim.plugins.configs.luasnip")(plugin, opts) -- include the default astronvim config that calls the setup call
       -- add more custom luasnip configuration such as filetype extend or custom snippets
-      local luasnip = require "luasnip"
+      local luasnip = require("luasnip")
       luasnip.filetype_extend("javascript", { "javascriptreact" })
     end,
   },
@@ -61,26 +63,26 @@ return {
   {
     "windwp/nvim-autopairs",
     config = function(plugin, opts)
-      require "astronvim.plugins.configs.nvim-autopairs"(plugin, opts) -- include the default astronvim config that calls the setup call
+      require("astronvim.plugins.configs.nvim-autopairs")(plugin, opts) -- include the default astronvim config that calls the setup call
       -- add more custom autopairs configuration such as custom rules
-      local npairs = require "nvim-autopairs"
-      local Rule = require "nvim-autopairs.rule"
-      local cond = require "nvim-autopairs.conds"
+      local npairs = require("nvim-autopairs")
+      local Rule = require("nvim-autopairs.rule")
+      local cond = require("nvim-autopairs.conds")
       npairs.add_rules(
         {
           Rule("$", "$", { "tex", "latex" })
-            -- don't add a pair if the next character is %
-            :with_pair(cond.not_after_regex "%%")
-            -- don't add a pair if  the previous character is xxx
-            :with_pair(
-              cond.not_before_regex("xxx", 3)
-            )
-            -- don't move right when repeat character
-            :with_move(cond.none())
-            -- don't delete if the next character is xx
-            :with_del(cond.not_after_regex "xx")
-            -- disable adding a newline when you press <cr>
-            :with_cr(cond.none()),
+          -- don't add a pair if the next character is %
+              :with_pair(cond.not_after_regex("%%"))
+          -- don't add a pair if  the previous character is xxx
+              :with_pair(
+                cond.not_before_regex("xxx", 3)
+              )
+          -- don't move right when repeat character
+              :with_move(cond.none())
+          -- don't delete if the next character is xx
+              :with_del(cond.not_after_regex("xx"))
+          -- disable adding a newline when you press <cr>
+              :with_cr(cond.none()),
         },
         -- disable for .vim files, but it work for another filetypes
         Rule("a", "a", "-vim")
@@ -89,10 +91,10 @@ return {
   },
 
   -- == Plugins That I Need ==
-  {
-    "windwp/nvim-ts-autotag",
-    opts = {},
-  },
+  -- {
+  --   "windwp/nvim-ts-autotag",
+  --   opts = {},
+  -- },
   {
     "nmac427/guess-indent.nvim",
     opts = {},
@@ -106,85 +108,64 @@ return {
     },
     opts = {
       show_icons = true,
-      leader_key = '<leader><leader>', -- Recommended to be a single key
-      buffer_leader_key = 'm', -- Per Buffer Mappings
-    }
+      leader_key = "<leader><leader>", -- Recommended to be a single key
+      buffer_leader_key = "m",      -- Per Buffer Mappings
+    },
   },
   {
-    'simonmclean/triptych.nvim',
+    "simonmclean/triptych.nvim",
     dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'nvim-tree/nvim-web-devicons', -- optional for icons
-      'antosha417/nvim-lsp-file-operations' -- optional LSP integration
+      "nvim-lua/plenary.nvim",            -- required
+      "nvim-tree/nvim-web-devicons",      -- optional for icons
+      "antosha417/nvim-lsp-file-operations", -- optional LSP integration
     },
-    opts = {}, -- config options here
+    opts = {},                            -- config options here
     keys = {
-      { '<leader>-', ':Triptych<CR>' },
+      { "<leader>-", ":Triptych<CR>" },
     },
   },
   {
-    'b0o/incline.nvim',
+    "b0o/incline.nvim",
     config = function()
-      require('incline').setup()
+      require("incline").setup()
     end,
     -- Optional: Lazy load Incline
-    event = 'VeryLazy',
+    event = "VeryLazy",
   },
   {
-    'dstein64/vim-startuptime'
+    "dstein64/vim-startuptime",
   },
   -- == Overrided Plugins ==
 
   {
     "folke/flash.nvim",
+    opts = {
+      modes = {
+        char = {
+          highlight = {
+            backdrop = false,
+          },
+        },
+      },
+    },
+
     keys = {
-      { "s", function() require("flash").jump() end, mode = { "n", "x", "o" }, desc = "Jump forwards" },
+      {
+        "s",
+        function()
+          require("flash").jump()
+        end,
+        mode = { "n", "x", "o" },
+        desc = "Jump forwards",
+      },
       {
         "S",
-        function() require("flash").jump { search = { forward = false } } end,
+        function()
+          require("flash").jump({ search = { forward = false } })
+        end,
         mode = { "n", "x", "o" },
         desc = "Jump backwards",
       },
-    },
-  },
-  {
-    "brenton-leighton/multiple-cursors.nvim",
-    version = "*",
-    opts = {},
-    keys = {
-      {
-        "<C-Up>",
-        "<Cmd>MultipleCursorsAddUp<CR>",
-        mode = { "n", "i", "x" },
-        desc = "Add cursor and move up",
-      },
-      {
-        "<C-Down>",
-        "<Cmd>MultipleCursorsAddDown<CR>",
-        mode = { "n", "i", "x" },
-        desc = "Add cursor and move down",
-      },
-      {
-        "<C-LeftMouse>",
-        "<Cmd>MultipleCursorsMouseAddDelete<CR>",
-        mode = { "n", "i" },
-        desc = "Add or remove cursor",
-      },
-      {
-        "<Leader>ka",
-        "<Cmd>MultipleCursorsAddMatches<CR>",
-        mode = { "n", "x" },
-        desc = "Add cursors to cword",
-      },
-      {
-        "<Leader>kA",
-        "<Cmd>MultipleCursorsAddMatchesV<CR>",
-        mode = { "n", "x" },
-        desc = "Add cursors to cword in previous area",
-      },
-      -- {"<Leader>d", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = {"n", "x"}, desc = "Add cursor and jump to next cword"},
-      -- {"<Leader>D", "<Cmd>MultipleCursorsJumpNextMatch<CR>", mode = {"n", "x"}, desc = "Jump to next cword"},
-      -- {"<Leader>l", "<Cmd>MultipleCursorsLock<CR>", mode = {"n", "x"}, desc = "Lock virtual cursors"},
     },
   },
 
@@ -213,8 +194,8 @@ return {
           ["<leader>Rg"] = "open_cword", -- Open UI - search pattern = <cword>
           ["<leader>Rw"] = "open_cword_path", -- Open UI - search pattern = <cword> and path = current file's directory
           ["<leader>Ra"] = "open_again", -- Open UI - search pattern = Previous search pattern
-          ["<leader>Rx"] = "abort", -- Close UI / abort searching / abortadding results
-          ["<leader>Rc"] = "print_cmd", -- Print a version of last run rip grep that can be pasted into a shell
+          ["<leader>Rx"] = "abort",      -- Close UI / abort searching / abortadding results
+          ["<leader>Rc"] = "print_cmd",  -- Print a version of last run rip grep that can be pasted into a shell
           ["<leader>R?"] = "print_status", -- Print info about the current state of rgflow (mostly useful for deving on rgflow)
         },
         -- Visual/select mode maps
@@ -228,59 +209,57 @@ return {
       default_quickfix_mappings = true,
     },
   },
+  -- {
+  --   "bennypowers/splitjoin.nvim",
+  --   lazy = true,
+  --   keys = {
+  --     {
+  --       "gj",
+  --       function() require("splitjoin").join() end,
+  --       desc = "Join the object under cursor",
+  --     },
+  --     {
+  --       "g,",
+  --       function() require("splitjoin").split() end,
+  --       desc = "Split the object under cursor",
+  --     },
+  --   },
+  -- },
   {
-    "bennypowers/splitjoin.nvim",
-    lazy = true,
-    keys = {
-      {
-        "gj",
-        function() require("splitjoin").join() end,
-        desc = "Join the object under cursor",
-      },
-      {
-        "g,",
-        function() require("splitjoin").split() end,
-        desc = "Split the object under cursor",
-      },
-    },
-  },
-  {
-    "amitds1997/remote-nvim.nvim",
-    version = "*", -- Pin to GitHub releases
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- For standard functions
-      "MunifTanjim/nui.nvim", -- To build the plugin UI
-      "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
-    },
-    opts = {
-      offline_mode = {
-        enabled = false,
-        no_github = false,
-      }
-    }
-  },
-  {
-    'b0o/incline.nvim',
+    "b0o/incline.nvim",
     config = function()
-      require('incline').setup()
+      require("incline").setup()
     end,
     -- Optional: Lazy load Incline
-    event = 'VeryLazy',
+    event = "VeryLazy",
   },
   {
     "ghillb/cybu.nvim",
-    branch = "main", -- timely updates
+    branch = "main",                                                         -- timely updates
     -- branch = "v1.x", -- won't receive breaking changes
-    dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"}, -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" }, -- optional for icon support
     config = function()
       local ok, cybu = pcall(require, "cybu")
       if not ok then
         return
       end
       cybu.setup()
-      vim.keymap.set({"n", "v"}, "<c-s-tab>", "<plug>(CybuLastusedPrev)")
-      vim.keymap.set({"n", "v"}, "<c-tab>", "<plug>(CybuLastusedNext)")
+      vim.keymap.set({ "n", "v" }, "<c-s-tab>", "<plug>(CybuLastusedPrev)")
+      vim.keymap.set({ "n", "v" }, "<c-tab>", "<plug>(CybuLastusedNext)")
     end,
   },
-
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = function(_, opts)
+      local function on_move(data)
+        require("snacks").rename.on_rename_file(data.source, data.destination)
+      end
+      local events = require("neo-tree.events")
+      opts.event_handlers = opts.event_handlers or {}
+      vim.list_extend(opts.event_handlers, {
+        { event = events.FILE_MOVED,   handler = on_move },
+        { event = events.FILE_RENAMED, handler = on_move },
+      })
+    end,
+  },
 }
