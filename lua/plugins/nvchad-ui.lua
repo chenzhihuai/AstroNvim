@@ -22,6 +22,22 @@ return {
       opts = function(_, opts) return vim.tbl_deep_extend("force", opts, require "nvchad.cmp") end,
     },
     {
+      "saghen/blink.cmp",
+      optional = true,
+      opts = function(_, opts) 
+        return vim.tbl_deep_extend("force", opts, {
+          completion = {
+            -- ghost_text = { enabled = true },
+
+            -- from nvchad/ui plugin
+            -- exporting the ui config of nvchad blink menu
+            -- helps non nvchad users
+            menu = require("nvchad.blink").menu,
+          }
+        }) 
+      end,
+    },
+    {
       "AstroNvim/astrocore",
       opts = {
         options = { opt = { showtabline = 0 } },
