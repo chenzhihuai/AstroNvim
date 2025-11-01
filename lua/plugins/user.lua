@@ -12,7 +12,7 @@ return {
   "andweeb/presence.nvim",
   {
     "ray-x/lsp_signature.nvim",
-    enabled = false,
+    enabled = true,
     event = "BufRead",
     config = function()
       require("lsp_signature").setup()

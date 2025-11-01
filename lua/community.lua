@@ -35,17 +35,5 @@ return {
   { import = "astrocommunity.editing-support.bigfile-nvim" },
   { import = "astrocommunity.terminal-integration.flatten-nvim" },
   { import = "astrocommunity.editing-support.nvim-devdocs" },
-  -- { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },
-  {
-    "nvim-telescope/telescope.nvim",
-    opts = {
-      defaults = {
-        preview = false,
-        layout_config = {
-          -- preview_width = 0.618,
-          -- horizontal = { height = 0.8, preview_cutoff = 120, prompt_position = "top", width = 0.8 },
-        },
-      },
-    },
-  }
+  { import = "astrocommunity.scrolling.satellite-nvim" },
 }

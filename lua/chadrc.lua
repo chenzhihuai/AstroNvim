@@ -1,8 +1,9 @@
 local M = {}
 M.base46 = {
   theme = "aquarium",
-  integrations = { "diffview", "dap", "cmp", "notify", "telescope", "todo", "neogit", "snacks-picker", "blink-cmp" },
+  integrations = { "diffview", "dap", "cmp", "notify", "telescope", "todo", "neogit", "snacks-picker" },
 }
+
 M.ui = {
   statusline = {
     enabled = true,
@@ -19,13 +20,13 @@ M.ui = {
     bufwidth = 20,
   },
   cmp = {
-    lspkind_text = true,
+    lspkind_text = false,
     icons_left = false,
     style = "default", -- default/flat_light/flat_dark/atom/atom_colored
   },
 }
 M.lsp = {
-  -- signature = true,
+  signature = true,
 }
 M.nvdash = {
   load_on_startup = true,

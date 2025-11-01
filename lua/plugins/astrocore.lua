@@ -49,6 +49,7 @@ return {
         cmdheight = 1,
         laststatus = 3,
         foldcolumn = "0",
+        showtabline=2,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)

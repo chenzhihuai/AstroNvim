@@ -14,6 +14,7 @@ return {
     for i = 1, 9, 1 do
       vim.keymap.set("n", string.format("<A-%s>", i), function() vim.api.nvim_set_current_buf(vim.t.bufs[i]) end)
     end
+    vim.lsp.buf.rename = require('nvchad.lsp.renamer')
   end,
   specs = {
     {
@@ -24,7 +25,7 @@ return {
     {
       "saghen/blink.cmp",
       optional = true,
-      opts = function(_, opts) 
+      opts = function(_, opts)
         return vim.tbl_deep_extend("force", opts, {
           completion = {
             -- ghost_text = { enabled = true },
@@ -33,14 +34,27 @@ return {
             -- exporting the ui config of nvchad blink menu
             -- helps non nvchad users
             menu = require("nvchad.blink").menu,
+            documentation={
+              auto_show=true,
+              window={
+                border='single',
+                winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:Comment,EndOfBuffer:BlinkCmpDoc',
+              }
+            },
+          },
+          signature={
+            enabled=false,
+            window={
+              border='rounded',
+              winhighlight = 'Normal:BlinkCmpSignatureHelp,FloatBorder:Comment',
+            }
           }
-        }) 
+        })
       end,
     },
     {
       "AstroNvim/astrocore",
       opts = {
-        options = { opt = { showtabline = 0 } },
         autocmds = { bufferline = false, },
         mappings = {
           n = {
@@ -105,33 +119,6 @@ return {
           simple_syntax_colors = true, -- Bool value, simplifies the amounts of colors used for syntax highlighting.
         },
       },
-    },
-    {
-      "Saghen/blink.cmp",
-      optional=true,
-      opts={
-        completion={
-          menu={
-            border='single',
-            winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
-            scrollbar = false,
-          },
-          documentation={
-            auto_show=true,
-            window={
-              border='single',
-              winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
-            }
-          },
-        },
-        signature={
-          -- enabled=true,
-          window={
-            border='single',
-            winhighlight = 'Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder',
-          }
-        }
-      }
     },
 
     {
@@ -354,13 +341,13 @@ return {
             pcall(function() dofile(vim.g.base46_cache .. "cmp") end)
           end,
         },
-        {
-          "Saghen/blink.cmp",
-          optional=true,
-          opts= function()
-            pcall(function() dofile(vim.g.base46_cache .. "blink-cmp") end)
-          end,
-        },
+        -- {
+        --   "Saghen/blink.cmp",
+        --   optional=true,
+        --   opts= function()
+        --     pcall(function() dofile(vim.g.base46_cache .. "blink-cmp") end)
+        --   end,
+        -- },
         {
           "NeogitOrg/neogit",
           optional=true,
