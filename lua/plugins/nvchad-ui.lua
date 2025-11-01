@@ -9,18 +9,35 @@ return {
       dofile(vim.g.base46_cache .. "defaults")
       dofile(vim.g.base46_cache .. "statusline")
     end)
-    require "nvchad"
+    require("nvchad")
 
     for i = 1, 9, 1 do
-      vim.keymap.set("n", string.format("<A-%s>", i), function() vim.api.nvim_set_current_buf(vim.t.bufs[i]) end)
+      vim.keymap.set("n", string.format("<A-%s>", i), function()
+        vim.api.nvim_set_current_buf(vim.t.bufs[i])
+      end)
     end
-    vim.lsp.buf.rename = require('nvchad.lsp.renamer')
+    vim.lsp.buf.rename = require("nvchad.lsp.renamer")
   end,
   specs = {
     {
+      "b0o/incline.nvim",
+      opts = {
+        window = {
+          winhighlight = {
+            active = { Normal = "Search" },
+            inactive = { Normal = "Search" },
+          },
+        },
+      },
+      -- Optional: Lazy load Incline
+      event = "VeryLazy",
+    },
+    {
       "hrsh7th/nvim-cmp",
       optional = true,
-      opts = function(_, opts) return vim.tbl_deep_extend("force", opts, require "nvchad.cmp") end,
+      opts = function(_, opts)
+        return vim.tbl_deep_extend("force", opts, require("nvchad.cmp"))
+      end,
     },
     {
       "saghen/blink.cmp",
@@ -34,35 +51,36 @@ return {
             -- exporting the ui config of nvchad blink menu
             -- helps non nvchad users
             menu = require("nvchad.blink").menu,
-            documentation={
-              auto_show=true,
-              window={
-                border='single',
-                winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:Comment,EndOfBuffer:BlinkCmpDoc',
-              }
+            documentation = {
+              auto_show = true,
+              window = {
+                border = "single",
+                winhighlight = "Normal:BlinkCmpDoc,FloatBorder:Comment,EndOfBuffer:BlinkCmpDoc",
+              },
             },
           },
-          signature={
-            enabled=false,
-            window={
-              border='rounded',
-              winhighlight = 'Normal:BlinkCmpSignatureHelp,FloatBorder:Comment',
-            }
-          }
+          signature = {
+            enabled = false,
+            window = {
+              border = "single",
+              winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:Comment",
+            },
+          },
         })
       end,
     },
     {
       "AstroNvim/astrocore",
       opts = {
-        autocmds = { bufferline = false, },
+        autocmds = { bufferline = false },
         mappings = {
           n = {
             ["<Leader>h"] = {
               function()
                 local is_valid_win = function(win)
                   local bufnr = vim.api.nvim_win_get_buf(win)
-                  return require("astrocore.buffer").is_valid(bufnr) or vim.bo[bufnr].filetype == "alpha"
+                  return require("astrocore.buffer").is_valid(bufnr)
+                      or vim.bo[bufnr].filetype == "alpha"
                 end
                 local cur_win = vim.api.nvim_get_current_win()
                 -- try to find the most suitable window for Alpha
@@ -78,7 +96,38 @@ return {
               end,
               desc = "Home Screen",
             },
-            ["<Leader>ft"] = { function() require("nvchad.themes").open() end, desc = "Find themes" },
+            ["<Leader>ft"] = {
+              function()
+                require("nvchad.themes").open()
+              end,
+              desc = "Find themes",
+            },
+            ["<F10>"] = {
+              function()
+                require('nvchad.term').toggle { pos= 'float'}
+              end,
+              desc = "terminal",
+            },
+            ["<F9>"] = {
+              function()
+                require('nvchad.term').toggle { pos = 'sp'}
+              end,
+              desc = "terminal",
+            },
+          },
+          t = {
+            ["<F10>"] = {
+              function()
+                require('nvchad.term').toggle { pos= 'float'}
+              end,
+              desc = "terminal",
+            },
+            ["<F9>"] = {
+              function()
+                require('nvchad.term').toggle { pos = 'sp'}
+              end,
+              desc = "terminal",
+            },
           },
         },
       },
@@ -86,8 +135,8 @@ return {
 
     -- Disable unnecessary plugins
     { import = "astrocommunity.recipes.disable-tabline" },
-    { "rebelot/heirline.nvim", enabled=false, opts = { statusline = false } },
-    { "goolord/alpha-nvim", enabled = false },
+    { "rebelot/heirline.nvim",                          enabled = false, opts = { statusline = false } },
+    { "goolord/alpha-nvim",                             enabled = false },
     {
       "folke/snacks.nvim",
       optional = true,
@@ -95,26 +144,25 @@ return {
       opts = { dashboard = { enabled = false } },
     },
     { "brenoprata10/nvim-highlight-colors", enabled = false },
-    { "NvChad/nvim-colorizer.lua", enabled = false },
+    { "NvChad/nvim-colorizer.lua",          enabled = false },
 
-    { "nvim-lua/plenary.nvim", lazy = true },
-    { "NvChad/volt", lazy = true },
-    { "nvzone/menu" , lazy = false },
+    { "nvim-lua/plenary.nvim",              lazy = true },
+    { "NvChad/volt",                        lazy = true },
+    { "nvzone/menu",                        lazy = false },
     -- { import = "astrocommunity.recipes.picker-nvchad-theme" },
-
 
     {
       "AstroNvim/astrotheme",
       enabled = false,
       opts = {
         style = {
-          transparent = false, -- Bool value, toggles transparency.
-          inactive = false, -- Bool value, toggles inactive window color.
-          float = true, -- Bool value, toggles floating windows background colors.
-          neotree = true, -- Bool value, toggles neo-trees background color.
+          transparent = false,    -- Bool value, toggles transparency.
+          inactive = false,       -- Bool value, toggles inactive window color.
+          float = true,           -- Bool value, toggles floating windows background colors.
+          neotree = true,         -- Bool value, toggles neo-trees background color.
 
-          border = true, -- Bool value, toggles borders.
-          title_invert = true, -- Bool value, swaps text and background colors.
+          border = true,          -- Bool value, toggles borders.
+          title_invert = true,    -- Bool value, swaps text and background colors.
           italic_comments = true, -- Bool value, toggles italic comments.
           simple_syntax_colors = true, -- Bool value, simplifies the amounts of colors used for syntax highlighting.
         },
@@ -123,18 +171,18 @@ return {
 
     {
       "nvim-tree/nvim-tree.lua",
-      enabled=false,
-      opts  = function ()
-        vim.api.nvim_create_autocmd({"BufEnter", "BufNewFile"}, {
-          pattern={"NvimTree_*"},
-          callback=function(_)
-            vim.cmd [[setlocal fillchars=vert:▐,horiz:▄,vertright:▐,horizup:▟]]
-          end
+      enabled = false,
+      opts = function()
+        vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+          pattern = { "NvimTree_*" },
+          callback = function(_)
+            vim.cmd([[setlocal fillchars=vert:▐,horiz:▄,vertright:▐,horizup:▟]])
+          end,
         })
         vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
-          require('menu.utils').delete_old_menus()
+          require("menu.utils").delete_old_menus()
 
-          vim.cmd.exec '"normal! \\<RightMouse>"'
+          vim.cmd.exec('"normal! \\<RightMouse>"')
 
           -- clicked buf
           local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
@@ -143,26 +191,30 @@ return {
           require("menu").open(options, { mouse = true })
         end, {})
       end,
-      keys ={
-        {"<leader>e", "<cmd>NvimTreeToggle<cr>", desc="NvimTree"}
-      }
+      keys = {
+        { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "NvimTree" },
+      },
     },
 
     {
       "nvim-neo-tree/neo-tree.nvim",
       -- enabled=false,
-      keys ={
-        {"<RightMouse>", function()
-          require('menu.utils').delete_old_menus()
+      keys = {
+        {
+          "<RightMouse>",
+          function()
+            require("menu.utils").delete_old_menus()
 
-          vim.cmd.exec '"normal! \\<RightMouse>"'
+            vim.cmd.exec('"normal! \\<RightMouse>"')
 
-          -- clicked buf
-          local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
-          local options = vim.bo[buf].ft == "neo-tree" and "neo-tree" or "default"
+            -- clicked buf
+            local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+            local options = vim.bo[buf].ft == "neo-tree" and "neo-tree" or "default"
 
-          require("menu").open(options, { mouse = true })
-        end, desc="NeoTreeMenu"}
+            require("menu").open(options, { mouse = true })
+          end,
+          desc = "NeoTreeMenu",
+        },
       },
       opts = {
 
@@ -174,7 +226,9 @@ return {
         event_handlers = {
           {
             event = "neo_tree_buffer_enter",
-            handler = function(_) vim.cmd [[setlocal fillchars=vert:▐,horiz:▄,vertright:▐,horizup:▟]] end,
+            handler = function(_)
+              vim.cmd([[setlocal fillchars=vert:▐,horiz:▄,vertright:▐,horizup:▟]])
+            end,
           },
         },
       },
@@ -194,12 +248,14 @@ return {
           },
           {
             ft = "toggleterm",
-            filter = function(buf, win) return vim.api.nvim_win_get_config(win).relative == "" end,
+            filter = function(buf, win)
+              return vim.api.nvim_win_get_config(win).relative == ""
+            end,
           },
         },
-        options={
-          left={wo={winbar=false}},
-          bottom={size=16},
+        options = {
+          left = { wo = { winbar = false } },
+          bottom = { size = 16 },
         },
         wo = {
           -- winbar = false,
@@ -210,10 +266,10 @@ return {
     {
       "folke/snacks.nvim",
       opts = {
-        styles={
-          notification={border='single'},
+        styles = {
+          notification = { border = "single" },
         },
-        dashboard = { enabled = false, },
+        dashboard = { enabled = false },
         picker = {
           layout = {
             row = 1,
@@ -223,12 +279,12 @@ return {
               width = 0.8,
               min_width = 120,
               height = 0.7,
-              border="right",
+              border = "right",
               {
                 box = "vertical",
                 border = "none",
-                { win = "input", title = "{title} {live} {flags}", height = 1, border = "rounded" },
-                { box = "vertical", border = "rounded", { win = "list", border = "hpad" } },
+                { win = "input",    title = "{title} {live} {flags}", height = 1,                       border = "rounded" },
+                { box = "vertical", border = "rounded",               { win = "list", border = "hpad" } },
               },
               { win = "preview", title = "{preview}", border = "rounded" },
             },
@@ -240,9 +296,11 @@ return {
       "chenzhihuai/base46",
       branch = "custom",
       lazy = true,
-      init = function() vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/" end,
+      init = function()
+        vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
+      end,
       build = function()
-        vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
+        vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
         require("base46").load_all_highlights()
       end,
       -- load base46 cache when necessary
@@ -261,84 +319,108 @@ return {
           "folke/which-key.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "whichkey") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "whichkey")
+            end)
           end,
         },
         {
           "lukas-reineke/indent-blankline.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "blankline") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "blankline")
+            end)
           end,
         },
         {
           "nvim-telescope/telescope.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "telescope") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "telescope")
+            end)
           end,
         },
         {
           "neovim/nvim-lspconfig",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "lsp") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "lsp")
+            end)
           end,
         },
         {
           "nvim-neo-tree/neo-tree.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "neo-tree") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "neo-tree")
+            end)
           end,
         },
         {
           "nvim-tree/nvim-tree.lua",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "nvimtree") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "nvimtree")
+            end)
           end,
         },
         {
           "williamboman/mason.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "mason") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "mason")
+            end)
           end,
         },
         {
           "lewis6991/gitsigns.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "git") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "git")
+            end)
           end,
         },
         {
           "nvim-tree/nvim-web-devicons",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "devicons") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "devicons")
+            end)
           end,
         },
         {
           "echasnovski/mini.icons",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "devicons") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "devicons")
+            end)
           end,
         },
         {
           "folke/snacks.nvim",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "snacks-picker") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "snacks-picker")
+            end)
           end,
         },
         {
           "hrsh7th/nvim-cmp",
           optional = true,
           opts = function()
-            pcall(function() dofile(vim.g.base46_cache .. "cmp") end)
+            pcall(function()
+              dofile(vim.g.base46_cache .. "cmp")
+            end)
           end,
         },
         -- {
@@ -350,7 +432,7 @@ return {
         -- },
         {
           "NeogitOrg/neogit",
-          optional=true,
+          optional = true,
           opts = function()
             dofile(vim.g.base46_cache .. "git")
             dofile(vim.g.base46_cache .. "neogit")
@@ -358,7 +440,7 @@ return {
         },
         {
           "sindrets/diffview.nvim",
-          optional=true,
+          optional = true,
           opts = function()
             dofile(vim.g.base46_cache .. "diffview")
           end,

@@ -68,10 +68,8 @@ return {
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
-        ['<F10>'] = { function() vim.cmd[[ToggleTerm direction=float]] end, desc = "terminal"},
-        ['<F9>'] = { function() vim.cmd[[ToggleTerm]] end, desc = "terminal"},
         ["<leader>fz"] =  { function()
-					Snacks.picker.zoxide(
+					require('snacks').picker.zoxide(
 					{
 						finder = "files_zoxide",
 						format = "file",
@@ -117,10 +115,6 @@ return {
       v = {
         ["<F14>"] = "<esc>",
       },
-      t={
-        ['<F10>'] = { function() vim.cmd[[ToggleTerm direction=float]] end, desc = "terminal"},
-        ['<F9>'] = { function() vim.cmd[[ToggleTerm]] end, desc = "terminal"},
-      }
     },
   },
 }

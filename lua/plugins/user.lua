@@ -125,14 +125,6 @@ return {
     },
   },
   {
-    "b0o/incline.nvim",
-    config = function()
-      require("incline").setup()
-    end,
-    -- Optional: Lazy load Incline
-    event = "VeryLazy",
-  },
-  {
     "dstein64/vim-startuptime",
   },
   -- == Overrided Plugins ==
@@ -225,14 +217,6 @@ return {
   --     },
   --   },
   -- },
-  {
-    "b0o/incline.nvim",
-    config = function()
-      require("incline").setup()
-    end,
-    -- Optional: Lazy load Incline
-    event = "VeryLazy",
-  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = function(_, opts)

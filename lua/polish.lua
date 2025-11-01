@@ -17,4 +17,5 @@ if vim.g.neovide then
   vim.g.neovide_detach_on_quit = 'always_detach'
   vim.g.neovide_position_animation_length = 0.15
   vim.g.neovide_cursor_animate_command_line = false
+  vim.g.neovide_cursor_smooth_blink = true
 end
